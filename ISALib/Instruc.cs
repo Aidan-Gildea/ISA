@@ -7,26 +7,28 @@ using System.Threading.Tasks;
 
 namespace ISALib
 {
-    public enum Thing 
+
+    public class Instruc
     {
-        OPCODE,
-        REGISTER,
-        VALUE,
-        PAD
-    };
-    public class Instruction
-    {
+        public enum Thing
+        {
+            OPCODE,
+            REGISTER,
+            VALUE,
+            PAD
+        };
+
         public Thing[] Order;
 
         public KeyValuePair<string, byte> OpCode;
 
-        public Instruction(Thing[] ORDER, KeyValuePair<string, byte> OPCODE) 
+        public Instruc(Thing[] ORDER, KeyValuePair<string, byte> OPCODE)
         {
             Order = ORDER;
             OpCode = OPCODE;
         }
 
-        public byte[] Assemble(string[] perameters)
+        public byte[] Assemble(string[] perameters) //includes opcode, so offset ny 1
         {
             byte[] bytes = new byte[4];
 
@@ -53,6 +55,27 @@ namespace ISALib
             }
 
             return bytes;
+        }
+
+        public string Disassemble(byte[] args) 
+        {
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < args.Length; i++) 
+            {
+                switch (Order[i]) 
+                {
+                    case Thing.OPCODE:
+                        sb.Append($"{OpCode.Key} ");
+                        break;
+                    case Thing.REGISTER:
+                        sb.Append($"{} ");
+                        break;
+                    case Thing.VALUE:
+                        break;
+                    case Thing.PAD:
+                        break;
+                }
+            }
         }
     }
 }

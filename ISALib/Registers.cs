@@ -10,7 +10,8 @@ namespace ISALib
     {
         public static Dictionary<string, byte> reg = new() 
         {
-            ["R0"] = 0x00
+            ["R0"] = 0x00,
+            ["R1"] = 0x01
         };
     }
 }
