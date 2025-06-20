@@ -22,10 +22,13 @@ namespace ISALib
 
         public KeyValuePair<string, byte> OpCode;
 
-        public Instruc(Thing[] ORDER, KeyValuePair<string, byte> OPCODE)
+        public Action<ushort[], byte, byte, byte> operation; //action is when void, func is when function is not void. 
+
+        public Instruc(Thing[] ORDER, KeyValuePair<string, byte> OPCODE, Action<ushort[], byte, byte, byte> action = null)
         {
             Order = ORDER;
             OpCode = OPCODE;
+            this.operation = action;
         }
 
         public byte[] Assemble(string[] perameters) //includes opcode, so offset ny 1
@@ -67,15 +70,17 @@ namespace ISALib
                     case Thing.OPCODE:
                         sb.Append($"{OpCode.Key} ");
                         break;
-                    case Thing.REGISTER:
-                        sb.Append($"{} ");
+                    case Thing.REGISTER: //turns the register into a string, using the dictionary in Registers.cs
+                        sb.Append($"{Registers.reg.FirstOrDefault(x => x.Value == args[i]).Key} ");
                         break;
-                    case Thing.VALUE:
+                    case Thing.VALUE: //turns the value into a string
+                        sb.Append($"{args[i]} ");
                         break;
-                    case Thing.PAD:
+                    case Thing.PAD://does nothing, just a placeholder for the instruction
                         break;
                 }
             }
+            return sb.ToString();
         }
     }
 }
