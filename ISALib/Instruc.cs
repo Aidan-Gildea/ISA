@@ -22,9 +22,10 @@ namespace ISALib
 
         public KeyValuePair<string, byte> OpCode;
 
-        public Action<ushort[], byte, byte, byte> operation; //action is when void, func is when function is not void. 
+        public Action<ushort[], byte, byte, byte, int> operation; //action is when void, func is when function is not void. 
+        
 
-        public Instruc(Thing[] ORDER, KeyValuePair<string, byte> OPCODE, Action<ushort[], byte, byte, byte> action = null)
+        public Instruc(Thing[] ORDER, KeyValuePair<string, byte> OPCODE, Action<ushort[], byte, byte, byte, int> action = null)
         {
             Order = ORDER;
             OpCode = OPCODE;

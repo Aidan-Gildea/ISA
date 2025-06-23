@@ -34,20 +34,20 @@ namespace ISA.Assembler
 
         static byte[] Assemble(string File) 
         {
-            Dictionary<string, byte> labels;
             //first pass
             string[] file = ParseStringsFromFile(File);
-            foreach(var l in file) 
+
+            Dictionary<string, ushort> labels = new();
+
+            for(int l = 0; l < file.Length; l++) 
             {
-                string[] parts = l.ToUpper().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                foreach (var word in parts) 
+                string[] parts = file[l].ToUpper().Split(' ', StringSplitOptions.RemoveEmptyEntries); //splits each line into separate parts. 
+                if (parts[0] == LABEL) 
                 {
-                    if(word == LABEL) 
-                    {
-                        //add label to dictoinary
-                    }
+                    labels.Add(parts[1], (ushort)(l+1));
                 }
             }
+            //iterate through and get all labels. 
 
             int currentByte = 0;
             byte[] machineCode = new byte[file.Length * INSTRUCTION_LENGTH];
@@ -57,6 +57,8 @@ namespace ISA.Assembler
             foreach (var line in file)
             {
                 string[] parts = line.ToUpper().Split(' ', StringSplitOptions.RemoveEmptyEntries); //splits each line into separate parts. 
+
+                
 
                 byte[] bytes = Codes[parts[0]].Assemble(parts);
                 foreach (byte val in bytes)

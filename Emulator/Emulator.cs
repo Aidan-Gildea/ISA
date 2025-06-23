@@ -15,7 +15,7 @@ namespace ISA.Emulator
 
         static ushort[] Registers = new ushort[NUM_OF_REGISTERS]; // checks off :)
 
-        static int InstructionRegister = 0;
+        static int InstructionRegister = 0; //change to int later
 
         static int IP => Registers[reg["IP"]];
 
@@ -48,7 +48,7 @@ namespace ISA.Emulator
 
                 //possible idea: pass in the operation function as a perameter to the dictionar in opcodes, instead of using this switch. 
                 string key = Codes.FirstOrDefault(x => x.Value.OpCode.Value == OPCODE).Key;
-                Codes[key].operation(Registers, PARAM1, PARAM2, PARAM3);
+                Codes[key].operation(Registers, PARAM1, PARAM2, PARAM3, InstructionRegister);
 
             }
 
