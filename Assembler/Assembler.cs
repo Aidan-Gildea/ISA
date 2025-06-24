@@ -8,6 +8,7 @@ namespace ISA.Assembler
 {
     internal class Assembler
     {
+        //done!
         const string COMMENT = "#"; // comment string. 
         const string LABEL = ":";
         const string COMMENT2 = ";";
