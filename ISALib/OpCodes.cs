@@ -26,8 +26,8 @@ namespace ISALib
             ["SETBIT"] = new([OPCODE, REGISTER, VALUE, PAD], new("SETBIT", 0x17), SETBIT),
             ["CLRBIT"] = new([OPCODE, REGISTER, VALUE, PAD], new("CLRBIT", 0x18), CLRBIT),
             ["MOV"] = new([OPCODE, REGISTER, REGISTER, PAD], new("MOV", 0x40), MOV),
-            ["PRNT"] = new([OPCODE, REGISTER, PAD, PAD], new("PRNT", 0x42), PRNT),
-            ["READ"] = new([OPCODE, REGISTER, PAD, PAD], new("READ", 0x44), READ),
+            ["PRNT"] = new([OPCODE, PAD, PAD, PAD], new("PRNT", 0x42), PRNT),
+            ["READ"] = new([OPCODE, PAD, PAD, PAD], new("READ", 0x44), READ),
             ["RNDM"] = new([OPCODE, VALUE, VALUE, PAD], new("RNDM", 0x43), RNDM),
             ["LOAD"] = new([OPCODE, VALUE, VALUE, REGISTER], new("LOAD", 0x46), LOAD),  //note that the two values are actually two parts of the mem address. 
             ["STR"] = new([OPCODE, VALUE, VALUE, REGISTER], new("STR", 0x47), STR),     //note that the two values are actually two parts of the mem address. 
@@ -40,7 +40,9 @@ namespace ISALib
             ["NAND"] = new([OPCODE, REGISTER, REGISTER, REGISTER], new("NAND", 0x24), NAND),
             ["XOR"] = new([OPCODE, REGISTER, REGISTER, REGISTER], new("XOR", 0x25), XOR),
             ["LSHF"] = new([OPCODE, REGISTER, REGISTER, REGISTER], new("LSHF", 0x26), LSHF),
-            ["RSHF"] = new([OPCODE, REGISTER, REGISTER, REGISTER], new("RSHF", 0x27), RSHF)
+            ["RSHF"] = new([OPCODE, REGISTER, REGISTER, REGISTER], new("RSHF", 0x27), RSHF),
+            ["JMP"] = new([OPCODE, LABEL, PAD, PAD], new("JMP", 0x30), JMP),
+            ["JMPZ"] = new([OPCODE, LABEL, REGISTER, PAD], new("JMPZ", 0x31), JMPZ),
         };
 
     }

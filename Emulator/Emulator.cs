@@ -21,7 +21,6 @@ namespace ISA.Emulator
 
         const string machineFileName = "C:\\Users\\Aidan.Gildea\\source\\repos\\ISA\\Assembler\\bin\\Debug\\net8.0\\TestData\\TestInfiniteCounter.bin";
 
-        //Dictionary<> Is there a way to make a function dictionary??
         //make gotos
         //implement special registers
         //get proper registers working

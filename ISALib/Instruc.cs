@@ -15,7 +15,8 @@ namespace ISALib
             OPCODE,
             REGISTER,
             VALUE,
-            PAD
+            PAD,
+            LABEL
         };
 
         public Thing[] Order;
@@ -32,7 +33,7 @@ namespace ISALib
             this.operation = action;
         }
 
-        public byte[] Assemble(string[] perameters) //includes opcode, so offset ny 1
+        public byte[] Assemble(string[] perameters, Dictionary<string, byte> labels) //includes opcode, so offset ny 1
         {
             byte[] bytes = new byte[4];
 
@@ -54,6 +55,10 @@ namespace ISALib
 
                     case Thing.PAD:
                         bytes[i] = 0x00;
+                        break;
+
+                    case Thing.LABEL:
+                        bytes[i] = labels[perameters[i]];
                         break;
                 }
             }
@@ -78,6 +83,9 @@ namespace ISALib
                         sb.Append($"{args[i]} ");
                         break;
                     case Thing.PAD://does nothing, just a placeholder for the instruction
+                        break;
+                    case Thing.LABEL:
+                        sb.Append($"{args[i]} ");
                         break;
                 }
             }
