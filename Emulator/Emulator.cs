@@ -19,7 +19,7 @@ namespace ISA.Emulator
 
         static int IP => Registers[reg["IP"]];
 
-        const string machineFileName = "C:\\Users\\Aidan.Gildea\\source\\repos\\ISA\\Assembler\\bin\\Debug\\net8.0\\TestData\\TestInfiniteCounter.bin";
+        const string machineFileName = "C:\\Users\\apgil\\ISA\\ISA\\Assembler\\TestData\\RockPaperScissors.bin";
 
         //make gotos
         //implement special registers
@@ -56,7 +56,6 @@ namespace ISA.Emulator
 
         static int[] ConvertBinToInstructions(string Address) // ts so ahh 💀
         {
-            Emulator emulation;
             //will die on stack, its ok
             //just bundling up each byte into integers? 
             byte[] machineCode = File.ReadAllBytes(Address);

@@ -14,8 +14,8 @@ namespace ISA.Assembler
         const string COMMENT2 = ";";
         const byte INSTRUCTION_LENGTH = 4; // 4 bytes / instruction
 
-        const string AssemblyCodeFile = "C:\\Users\\Aidan.Gildea\\source\\repos\\ISA\\Assembler\\bin\\Debug\\net8.0\\TestData\\InfiniteCouter.asm";
-        const string BinaryOutputFile = "TestData\\TestInfiniteCounter.bin";
+        const string AssemblyCodeFile = "C:\\Users\\apgil\\ISA\\ISA\\Assembler\\TestData\\RockPaperScissors.asm";
+        const string BinaryOutputFile = "C:\\Users\\apgil\\ISA\\ISA\\Assembler\\TestData\\RockPaperScissors.bin";
 
         static void Main(string[] args)
         {
@@ -44,12 +44,18 @@ namespace ISA.Assembler
             int passednonlabels = 0; 
             for(int l = 0; l < file.Length; l++) 
             {
-                string[] parts = file[l].ToUpper().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                string line = file[l];
+                int commentIndex = line.IndexOf(COMMENT);
+                if (commentIndex >= 0) line = line.Substring(0, commentIndex);
+                commentIndex = line.IndexOf(COMMENT2);
+                if (commentIndex >= 0) line = line.Substring(0, commentIndex);
+
+                string[] parts = line.ToUpper().Split(' ', StringSplitOptions.RemoveEmptyEntries);
                 if (parts.Length == 0) 
                 {
                     continue;
                 }//splits each line into separate parts. 
-                if (parts[0] == COMMENT2) continue;
+                //if (parts[0] == COMMENT2) continue; // Handled above
                 if (parts[0] == LABEL) 
                 {
                     labels.Add(parts[1], (byte)(passednonlabels)); //note that the indexes start at 1. If i want to point 2 lines in the future, have to do +2
@@ -66,15 +72,22 @@ namespace ISA.Assembler
 
 
 
-            foreach (var line in file)
+            foreach (var rawLine in file)
             {
+                string line = rawLine;
+                int commentIndex = line.IndexOf(COMMENT);
+                if (commentIndex >= 0) line = line.Substring(0, commentIndex);
+                commentIndex = line.IndexOf(COMMENT2);
+                if (commentIndex >= 0) line = line.Substring(0, commentIndex);
+
                 if(line == "") 
                 {
                     continue;
                 }
                 string[] parts = line.ToUpper().Split(' ', StringSplitOptions.RemoveEmptyEntries); //splits each line into separate parts. 
+                if (parts.Length == 0) continue;
 
-                if (parts[0] == COMMENT2) continue;
+                //if (parts[0] == COMMENT2) continue;
 
                 if (parts[0] == LABEL) 
                 {
