@@ -1,4 +1,4 @@
-# AG-Core ISA & Software Toolchain
+# AG-Core Assembler, Emulator, and Disassembler
 A custom 32-bit Instruction Set Architecture (ISA) with a complete software stack, including a two-pass assembler, emulator, and disassembler.
 
 ## Overview
